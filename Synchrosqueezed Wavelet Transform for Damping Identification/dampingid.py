@@ -6,6 +6,8 @@ from scipy import special
 from scipy import stats
 import numpy as np
 
+#2016, cite this paper: http://lab.fs.uni-lj.si/ladisk/?what=abstract&ID=171
+
 class wt_damping_id:
     def __init__(self, x, t, freq, eta, sig=1.):
         """A class used for computation of (synchrosqueezed) continuous wavelet transform and damping identification
