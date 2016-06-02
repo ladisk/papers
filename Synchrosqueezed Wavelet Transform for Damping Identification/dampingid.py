@@ -1,5 +1,20 @@
-
 # coding: utf-8
+"""
+A class for identification of damping ratios based on methods discussed in [1].
+It offers an implementation of damping identification using the following methods:
+    -continuous wavelet transform (CWT)
+    -synchrosqueezed continuous wavelet transform (SWT)
+    -averaged synchrosqueezed continuous wavelet transform (SWT_avg)
+    -proportional synchrosqueezed continuous wavelet transform (SWT_prop)
+
+[1] Marko Mihalec, Janko Slavič and Miha Boltežar,
+Synchrosqueezed Wavelet Transform for Damping Identification,
+Mechanical Systems and Signal Processing (2016),
+10.1016/j.ymssp.2016.05.005.
+
+See also: http://lab.fs.uni-lj.si/ladisk/?what=abstract&ID=171
+"""
+
 
 from scipy import signal
 from scipy import special
@@ -16,28 +31,29 @@ class wt_damping_id:
         :param t: Time, 1d array at which each signal was recorded. The same length as x.
         :param freq: Frequencies, 1d array of frequencies for which the CWT or SWT is computed.
         :param eta: Frequency modulation parameter, float.
-        :param sig: Parameter of Gaussian window width, float. If sig==1, Morlet wavelet is used, else Gabor wavelet is used.
+        :param sig: Parameter of Gaussian window width, float. If sig==1 Morlet, else Gabor wavelet is used.
         """
         self.x = x
         self.t = t
         self.sig = sig
         self.eta = eta
-        self.freq = freq
+        self.freq = freq # [Hz]
         self.res_frek = len(freq)
         self.res_cas = len(t)
         self.casvs = t[-1]-t[0]
         
+    @property
     def cwt(self):
         """ Computes contunous wavelet transform of the signal
         :return: CWT, 2d complex array, a CWT over different times and scales.
         """
-        gaus1=1./((self.sig**2*np.pi)**(0.25))
+        gaus1=1./((self.sig**2*np.pi)**(0.25)) # fraction in Eq.(5) in [1]
         pot=2.*self.sig**2
         def valcon(s):
             Psi=s**-0.5*gaus1*np.exp(-(-uar/s)**2./pot-1.j*self.eta*2.*np.pi*(-uar/s))
             return signal.fftconvolve(Psi,self.x,mode='same')
-        uar=np.linspace(-self.casvs/2.,self.casvs/2.,self.res_cas)
-        sar=self.eta/(self.freq)
+        uar=np.linspace(-self.casvs/2.,self.casvs/2.,self.res_cas) # creating a centered time array
+        sar=self.eta/(self.freq) # calculating an array of scales corresponding to frequencies
         Q=np.zeros((self.res_frek,self.res_cas),dtype=complex)
         for i in range (0,self.res_frek):
             Q[i,:]=valcon(sar[i])
@@ -48,12 +64,14 @@ class wt_damping_id:
     def prelimfreq(self):
         """ Computes preliminary frequencies without modification
         :return: Preliminary frequency for each point on the time-scale plane, 2d complex array
+
+        See Eq.(6) in [1]
         """
         try:
             self.Q
         except AttributeError:
-            self.cwt()
-            
+            self.cwt
+
         res_cas1=1./(self.res_cas-1.)*self.casvs
         res_frek1=1./(self.res_frek-1.)*(self.freq[-1]-self.freq[0])*2.*np.pi
         gradW=np.gradient(self.Q, res_frek1, res_cas1)[1]
@@ -68,12 +86,14 @@ class wt_damping_id:
     def prelimfreq_scd(self):
         """ Computes preliminary frequencies with scale dependant modification
         :return: Preliminary frequency for each point on the time-scale plane, 2d complex array
+
+        See Section 3.1 in [1], Eq.(28) and Eq.(30).
         """
         try:
             self.Q
         except AttributeError:
-            self.cwt()
-            
+            self.cwt
+
         res_cas1=1./(self.res_cas-1.)*self.casvs
         res_frek1=1./(self.res_frek-1.)*(self.freq[-1]-self.freq[0])*2.*np.pi
         gradW=np.gradient(self.Q,res_frek1,res_cas1)[1]
@@ -94,12 +114,14 @@ class wt_damping_id:
     def prelimfreq_shifted(self):
         """ Computes preliminary frequencies with shifted coefficient modification
         :return: Preliminary frequency for each point on the time-scale plane, 2d complex array
+
+        See Section 3.1 in [1], Eq.(28) and Eq.(31).
         """
         try:
             self.Q
         except AttributeError:
-            self.cwt()
-            
+            self.cwt
+
         res_cas1=1./(self.res_cas-1.)*self.casvs
         res_frek1=1./(self.res_frek-1.)*(self.freq[-1]-self.freq[0])*2.*np.pi
         gradW=np.gradient(self.Q,res_frek1,res_cas1)[1]
@@ -118,12 +140,14 @@ class wt_damping_id:
     def prelimfreq_auto(self):
         """ Computes preliminary frequencies with autocorrelated modification
         :return: Preliminary frequency for each point on the time-scale plane, 2d complex array
+
+        See Section 3.1 in [1], Eq.(32) and Eq.(33).
         """
         try:
             self.Q
         except AttributeError:
-            self.cwt()
-            
+            self.cwt
+
         res_cas1=1./(self.res_cas-1.)*self.casvs
         res_frek1=1./(self.res_frek-1.)*(self.freq[-1]-self.freq[0])*2.*np.pi
         gradW=np.gradient(self.Q,res_frek1,res_cas1)[1]
@@ -152,7 +176,7 @@ class wt_damping_id:
         try:
             self.Q
         except AttributeError:
-            self.cwt()
+            self.cwt
         if omegacor:
             self.prelimfreq_auto()
         else:
@@ -274,6 +298,9 @@ class wt_damping_id:
         :param x01: center of the band
         :param width: One half of the width of the band
         :return: Skeleton, 2d array: absolute value on the ridge, zeroes everywhere else.
+
+        x01 is the index of the frequency in 'freq', around which the ridge is searched for.
+        x01 must be x01>width and x01<(len(freq)-width) so that the whole search band is within the array
         """
         M=abs(M1)
         (xlen,ylen)=M.shape
@@ -287,12 +314,15 @@ class wt_damping_id:
     def ident(self, trans, x01, width=20):
         """ Function that identifies damping.
         :param trans: Transformation to be used in the process, string. Either 'cwt', 'swt', 'swt_avg' or 'swt_prop'
-        :param x01: center of the band where skeleton is searched for
+        :param x01: center of the band where the ridge is searched for
         :param width: Width of band
         :return: identified frequency, damping ratio
+
+        x01 is the index of the frequency in 'freq', around which the ridge is searched for.
+        x01 must be x01>width and x01<(len(freq)-width) so that the whole search band is within the array
         """
         if trans=='cwt':
-            self.cwt();
+            self.cwt;
             self.obrez()
             M = self.skel(self.Qcut, x01, width)
         elif trans=='swt':
@@ -308,29 +338,29 @@ class wt_damping_id:
             self.obrez()
             M = self.skel(self.T_prop_cut, x01, width)
         else:
-            raise Exception('Neprepoznna metoda')
-        
+            raise Exception('Unrecognized method')
+        # identified modal frequency is the most common frequency on the ridge:
         frekident=self.freq[np.argmax(np.bincount(np.argmax(abs(M),0)))]
         smat = np.zeros(M.shape)
         for i in range (0,smat.shape[1]):
             smat[:,i]=self.eta/self.freq
         pomozna=(2.*abs(M)/((4*np.pi*self.sig**2*smat**2)**(0.25)))
-        leva=np.log(np.amax(pomozna,0))
-        leva[leva==-np.inf]=0
+        leva=np.log(np.amax(pomozna,0)) # left hand side of Eq.(9) in [1]
+        leva[leva==-np.inf]=0 # Overwriting divisions by 0
         leva[leva==0]=np.mean(leva)
         desna=-1*frekident*2*np.pi*self.t_cut
-        DES = np.vstack([desna, np.ones(len(desna))]).T
+        DES = np.vstack([desna, np.ones(len(desna))]).T # right hand side of Eq.(9) in [1]
         zeta_iden, lnAmp = np.linalg.lstsq(DES, leva)[0]
         return frekident, zeta_iden
         
 
 if __name__ == "__main__":
-    t = np.linspace(0,2,2000)
-    w = 20 #frequency
-    z = 0.01 #damping ratio
-    x = np.sin(2*np.pi*w*t)*np.exp(-2*np.pi*w*z*t)+(np.random.rand(len(t))-0.5)
+    t = np.linspace(0,2,2000) # array of time
+    w = 20 # frequency
+    z = 0.01 # damping ratio
+    x = np.sin(2*np.pi*w*t)*np.exp(-2*np.pi*w*z*t)+(np.random.rand(len(t))-0.5) #signal with added noise: Eq.(43) in [1]
 
-    frequencies = np.linspace(15,25,50)
+    frequencies = np.linspace(15,25,50) # range of frequencies for which the signal will be analyzed
     WT = wt_damping_id(x,t,frequencies,5)
     freq_id, z_id = WT.ident('swt_prop',25,10)
     print('Identified frequency: {0:4.1f}'.format(freq_id))
