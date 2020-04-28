@@ -8,3 +8,7 @@ Synchrosqueezed Wavelet Transform for Damping Identification,
 Mechanical Systems and Signal Processing, 
 [paper](http://lab.fs.uni-lj.si/ladisk/?what=abstract&ID=171),
 [code](./Synchrosqueezed Wavelet Transform for Damping Identification/Synchrosqueezed Wavelet Transform for Damping Identification.ipynb)
+
+# 2020
+* T. Barši Palmić, J. Slavič and M. Boltežar, 
+Process parameters for highly conductive FFF filaments
