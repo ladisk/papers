@@ -11,5 +11,5 @@ Mechanical Systems and Signal Processing,
 
 # 2020
 * T. Barši Palmić, J. Slavič and M. Boltežar, 
-Process parameters for highly conductive FFF filaments<br/>
-*\*Additional code will be provided when the paper will be accepted.*
+Process Parameters for FFF 3D-Printed Conductors for Applications in Sensors<br/>
+[paper](http://lab.fs.uni-lj.si/ladisk/?what=abstract&ID=257)
