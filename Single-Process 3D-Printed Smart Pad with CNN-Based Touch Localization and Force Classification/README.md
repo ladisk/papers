@@ -44,12 +44,7 @@ pip install -e .
 
 ### Training a Model
 
-1. **Using Python script:**
-   ```bash
-   python training.py
-   ```
-
-2. **Using Jupyter notebook:**
+1. **Using Jupyter notebook:**
    Open and run `model_training.ipynb` for an interactive training experience.
 
 ### Running Inference
