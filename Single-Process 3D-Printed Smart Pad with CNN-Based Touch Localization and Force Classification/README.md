@@ -54,12 +54,7 @@ pip install -e .
 
 ### Running Inference
 
-1. **Using Python script:**
-   ```bash
-   python main.py
-   ```
-
-2. **Using Jupyter notebook:**
+1. **Using Jupyter notebook:**
    Open and run `model_inference.ipynb` to test the pre-trained models.
 
 ### Using Pre-trained Models
