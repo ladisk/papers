@@ -15,6 +15,6 @@ Process Parameters for FFF 3D-Printed Conductors for Applications in Sensors<br/
 
 # 2026
 * T. Barši Palmić, E. Podlipnik, and J. Slavič, 
-Single-process 3D-printed smart pad with CNN-based touch localization and force classification
+Single-process 3D-printed smart pad with CNN-based touch localization and force classification, 
 Virtual and Physical Prototyping,
 [paper](https://www.ladisk.si/?what=abstract&ID=422)
