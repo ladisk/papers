@@ -1,0 +1,20 @@
+MEASUREMENTS DESCRIPTION
+
+34 bearings were measured, each pre-streesed in 2 directions for 4 times. Between measurements
+the bearings were removed and reinserted randomly into the rotating mass. There are a total of
+272 measurements of length 64000 with sampling frequency of 6400 Hz (measurements length = 10s).
+- 10 OK bearings - without applied force
+- 4 bearings with applied static force of 1500 N in axial direction
+- 4 bearings with applied static force of 1500 N in radial direction
+- 4 bearings with applied static force of 2500 N in axial direction
+- 4 bearings with applied static force of 2500 N in radial direction
+- 4 bearings with applied static force of 4166 N in axial direction
+- 4 bearings with applied static force of 3200 N in radial direction
+
+Inside measurement_x.pkl there is a dictionary with 6 keys:
+- force: force measurement
+- sound_pressure: sound pressure measurement
+- fault_present: 0 for "no fault" and 1 for "fault
+- fault_type: 0 for "no fault", 1 for "radial" and 2 for "axial"
+- fault_severity: 0 for "no fault", 1 for "boundary", 2 for "low" and 3 for "high"
+- applied_force: applied force in N
