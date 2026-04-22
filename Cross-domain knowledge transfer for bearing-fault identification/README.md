@@ -1,4 +1,4 @@
-# Cross-domain knowledge transfer for bearing fault identification
+# Cross-domain knowledge transfer for bearing-fault identification
 
 **The full implementation of the methods described in coresponding article, including all code and supporting materials, will be made publicly available upon acceptance of the article.**
 
@@ -6,7 +6,7 @@ This repository contains the code and resources for a machine learning project, 
 
 ## Overview
 
-The project implements a transfer learning approach to transfer knowledge about the bearing fault between different measurement domains (e.g., contact force measurements and non-contact sound pressure measurements), enabling accurate fault identification on the target domain, where labels are missing.
+The project implements a transfer learning approach to transfer knowledge about the bearing-fault between different measurement domains (e.g., contact force measurements and non-contact sound pressure measurements), enabling accurate fault identification on the target domain, where labels are missing.
 
 ## Repository structure
 
@@ -16,7 +16,7 @@ The project implements a transfer learning approach to transfer knowledge about 
 │   ├── 0_measurements_description.txt  # Description of measurements
 |   └── measurements_x.pkl              # Measurements from 1-272
 ├── Cross-domain_KT_pipeline            # Method pipeline
-├── model.py                            # Model architecture definitions
+├── model_components.py                 # Model components
 ├── README.md                           # Info about project
 └── requirements-txt                    # Python package dependencies
 ```
