@@ -6,6 +6,10 @@ Laboratory for dynamics of machines and structures, Faculty of Mech Eng, Univ of
 Single-process 3D-printed smart pad with CNN-based touch localization and force classification, 
 Virtual and Physical Prototyping,
 [paper](https://www.ladisk.si/?what=abstract&ID=422)
+* J. Šonc, K. Zaletelj, and J. Slavič, 
+Full-Field Full-Stress-Tensor Identification of Base-Excited Structures, 
+Mechanical Systems and Signal Processing, 
+[code](./Full-field full-stress-tensor identification of base-excited structures)
 
 # 2020
 * T. Barši Palmić, J. Slavič and M. Boltežar, 
