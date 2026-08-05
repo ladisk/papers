@@ -1,0 +1,11 @@
+# Git LFS tracking — large binary files
+# Pre-computed SEMM outputs
+dual_stage_base_pipeline/outputs/20260219_090812/stage1/Y_SEMM_stage1.npy filter=lfs diff=lfs merge=lfs -text
+dual_stage_base_pipeline/outputs/20260219_090812/stage2/Y_SEMM_stage2.npy filter=lfs diff=lfs merge=lfs -text
+dual_stage_base_pipeline/outputs/20260219_090812/stage2/Y_parent_acc.npy filter=lfs diff=lfs merge=lfs -text
+dual_stage_base_pipeline/outputs/20260219_090812/stage2/Y_overlay_base.npy filter=lfs diff=lfs merge=lfs -text
+dual_stage_base_pipeline/outputs/_stage1_numerical_runs/run_center_middle/stress_tensor_frf.npy filter=lfs diff=lfs merge=lfs -text
+# Hammer force measurements
+hammer_measurement_6_points/force/*.pkl filter=lfs diff=lfs merge=lfs -text
+# Base excitation accelerometer
+base_excitation_measurements/best_one/*.pkl filter=lfs diff=lfs merge=lfs -text

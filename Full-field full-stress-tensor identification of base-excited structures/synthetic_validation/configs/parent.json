@@ -1,0 +1,26 @@
+{
+  "E": 58e9,
+  "nu": 0.33,
+  "rho": 2700,
+  "thickness": 0.003,
+  "plate_lx": 0.15,
+  "plate_ly": 0.15,
+  "grid_nx": 29,
+  "grid_ny": 29,
+  "point_mass": 0.0,
+  "point_mass_xy": [0.075, 0.14],
+  "base_edge": "bottom",
+  "zeta": 0.005,
+  "nmodes": 10,
+  "fmin": 45.0,
+  "fmax": 200.0,
+  "nfreq": 200,
+  "force_points": {
+    "center_middle": [0.075, 0.075],
+    "center_top": [0.075, 0.13],
+    "left_top": [0.02, 0.13],
+    "left_middle": [0.02, 0.075],
+    "right_middle": [0.13, 0.075],
+    "right_top": [0.13, 0.13]
+  }
+}

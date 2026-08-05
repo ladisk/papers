@@ -1,0 +1,55 @@
+# ── Large measurement data ────────────────────────────────────────────────────
+# Camera recordings (938 MB each — store locally, not in git)
+*.hcc
+base_excitation_measurements/**/*.npy
+hammer_measurement_6_points/camera/
+
+# ── Superseded/oversize local artifacts (kept out of the public repo) ─────────
+dual_stage_base_pipeline/outputs/20*/
+synthetic_validation/figures_data/validation_fields*.npz
+synthetic_validation/analysis/broad_analysis/validation_fields.npz
+
+# ── ANSYS solver binary outputs ───────────────────────────────────────────────
+*.db
+*.rst
+*.mode
+*.full
+*.emat
+*.esav
+*.mlv
+*.DSP
+*.err
+*.log
+*.mntr
+*.BCS
+*.ce
+
+# ── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+.ipynb_checkpoints/
+*.egg-info/
+dist/
+build/
+.eggs/
+synthetic_validation/cache/
+
+# ── Jupyter ───────────────────────────────────────────────────────────────────
+.jupyter/
+*.nbconvert.ipynb
+
+# ── Virtual environments ──────────────────────────────────────────────────────
+venv/
+.venv/
+env/
+
+# ── OS ────────────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Editor ────────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp

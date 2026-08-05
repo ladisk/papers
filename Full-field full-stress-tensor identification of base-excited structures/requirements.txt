@@ -1,0 +1,28 @@
+# Core scientific stack
+numpy==2.2.4
+scipy==1.15.2
+matplotlib==3.10.1
+pandas==2.2.3
+
+# Modal identification (optional — set USE_SDYPY_EMA=True in notebooks to use)
+sdypy==0.5.1
+sdypy-EMA==0.28.0
+sdypy-FRF==0.1.0
+sdypy-excitation==0.1.1
+
+# Utilities
+tqdm==4.67.1
+
+# Jupyter
+jupyterlab>=4.0
+ipykernel>=6.0
+
+# SEMM (Stage 1 only — install from local pyFBSmaster/ directory)
+# pip install -e pyFBSmaster/
+
+# ANSYS (Stage 1 only — requires ANSYS license + installation)
+# ansys-mapdl-core
+# ansys-dpf-core
+
+# Telops camera HCC reader (Stage 1 only — proprietary, contact Telops)
+# TelopsToolbox
