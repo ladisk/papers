@@ -12,8 +12,14 @@ Data: method_contrast.npz
   trans_relrms   : (4, 2) — transmissibility, [SX, SXY], fraction
   direct_relrms  : (4, 2) — direct PSD,       [SX, SXY], fraction
 """
+from pathlib import Path as _Path
+
+# Repository root (this file's directory) - all paths below are relative to it.
+_REPO = _Path(__file__).resolve().parent
+(_REPO / 'synthetic_validation' / 'figures').mkdir(parents=True, exist_ok=True)
+
 import sys
-sys.path.insert(0, r'C:\Users\jasas\Work\Clanki\Clanek_2\Writing_article\article_bundle\scripts')
+sys.path.insert(0, str(_REPO))
 
 import matplotlib
 matplotlib.use('Agg')
@@ -27,10 +33,8 @@ from plot_style import apply_style, MM_TO_INCH
 apply_style()
 
 # ── Paths ─────────────────────────────────────────────────────────────────
-DATA_DIR = Path(r'C:\Users\jasas\Work\Clanki\Clanek_2\thermoelastic-stress-expansion'
-                r'\synthetic_validation\figures_data')
-FIG_DIR  = Path(r'C:\Users\jasas\Work\Clanki\Clanek_2\thermoelastic-stress-expansion'
-                r'\synthetic_validation\figures')
+DATA_DIR = (_REPO / 'synthetic_validation' / 'figures_data')
+FIG_DIR  = (_REPO / 'synthetic_validation' / 'figures')
 
 def save_fig(fig, name):
     FIG_DIR.mkdir(parents=True, exist_ok=True)

@@ -10,9 +10,15 @@ visible.
 Does NOT modify fig_component_maps.py or its outputs; this is a new script producing new
 output filenames only.
 """
+from pathlib import Path as _Path
+
+# Repository root (this file's directory) - all paths below are relative to it.
+_REPO = _Path(__file__).resolve().parent
+(_REPO / 'synthetic_validation' / 'figures').mkdir(parents=True, exist_ok=True)
+
 import os, sys, matplotlib
 matplotlib.use('Agg')
-sys.path.insert(0, r'C:\Users\jasas\Work\Clanki\Clanek_2\Writing_article\article_bundle\scripts')
+sys.path.insert(0, str(_REPO))
 from plot_style import apply_style, MM_TO_INCH
 apply_style()
 
@@ -20,7 +26,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 
-R = r'C:/Users/jasas/Work/Clanki/Clanek_2/thermoelastic-stress-expansion'
+R = str(_REPO)
 sys.path.insert(0, R)
 from synthetic_validation.harness import run_case_from_modal
 

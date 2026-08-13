@@ -5,9 +5,15 @@ with n retained modes and measure the rel-RMS error vs the full-mode truth, over
 full response band and over the 45-250 Hz analysis band. The error is flat from two
 modes on (the next structural mode is at 554 Hz).
 """
+from pathlib import Path as _Path
+
+# Repository root (this file's directory) - all paths below are relative to it.
+_REPO = _Path(__file__).resolve().parent
+(_REPO / 'synthetic_validation' / 'figures').mkdir(parents=True, exist_ok=True)
+
 import os, sys
 sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
-sys.path.insert(0, r'C:\Users\jasas\Work\Clanki\Clanek_2\Writing_article\article_bundle\scripts')
+sys.path.insert(0, str(_REPO))
 import numpy as np
 import matplotlib
 matplotlib.use('Agg')
@@ -17,8 +23,8 @@ from plot_style import apply_style, MM_TO_INCH
 apply_style()
 from synthetic_validation.harness import run_case_from_modal
 
-BASE = r'C:\Users\jasas\Work\Clanki\Clanek_2\thermoelastic-stress-expansion\synthetic_validation\analysis\broad_analysis'
-FIG  = Path(r'C:\Users\jasas\Work\Clanki\Clanek_2\thermoelastic-stress-expansion\synthetic_validation\figures')
+BASE = str(_REPO / 'synthetic_validation' / 'analysis' / 'broad_analysis')
+FIG  = (_REPO / 'synthetic_validation' / 'figures')
 COMPS = ['SX', 'SY', 'SXY']
 KW = dict(saa_level=1.0, fs=2000.0, n_frames=10000, seed=0, noise_sigma_T=0.0)
 

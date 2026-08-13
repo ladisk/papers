@@ -1,13 +1,19 @@
+from pathlib import Path as _Path
+
+# Repository root (this file's directory) - all paths below are relative to it.
+_REPO = _Path(__file__).resolve().parent
+(_REPO / 'synthetic_validation' / 'figures').mkdir(parents=True, exist_ok=True)
+
 import sys, matplotlib
 matplotlib.use('Agg')
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.gridspec import GridSpec
-sys.path.insert(0, r'C:\Users\jasas\Work\Clanki\Clanek_2\Writing_article\article_bundle\scripts')
+sys.path.insert(0, str(_REPO))
 from plot_style import apply_style, MM_TO_INCH
 apply_style()
 
-FIG = r'C:/Users/jasas/Work/Clanki/Clanek_2/thermoelastic-stress-expansion/synthetic_validation/figures'
+FIG = str(_REPO / 'synthetic_validation' / 'figures')
 def save_fig(fig, name):
     fig.savefig(f'{FIG}/{name}.pdf')
     fig.savefig(f'{FIG}/{name}.png')
@@ -21,7 +27,7 @@ def to_grid(v, x, y):
     G[iy, ix] = v
     return xs, ys, G
 
-d = np.load(r'C:/Users/jasas/Work/Clanki/Clanek_2/thermoelastic-stress-expansion/synthetic_validation/figures_data/straggler_data.npz', allow_pickle=True)
+d = np.load(str(_REPO / 'synthetic_validation' / 'figures_data' / 'straggler_data.npz'), allow_pickle=True)
 x, y = d['x'], d['y']
 freqs = d['freqs']
 vm_field_tru = d['vm_field_tru'] / 1e12   # -> MPa^2/Hz

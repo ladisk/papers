@@ -6,8 +6,14 @@ Four rungs of the shear (tau_xy) rel-RMS error in the stress-amplitude domain:
   SEMM (the proposed method)                   11.3%
   exact prior (floor)                          0.1%
 """
+from pathlib import Path as _Path
+
+# Repository root (this file's directory) - all paths below are relative to it.
+_REPO = _Path(__file__).resolve().parent
+(_REPO / 'synthetic_validation' / 'figures').mkdir(parents=True, exist_ok=True)
+
 import sys
-sys.path.insert(0, r'C:\Users\jasas\Work\Clanki\Clanek_2\Writing_article\article_bundle\scripts')
+sys.path.insert(0, str(_REPO))
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -15,7 +21,7 @@ from pathlib import Path
 from plot_style import apply_style, MM_TO_INCH
 apply_style()
 
-FIG = Path(r'C:\Users\jasas\Work\Clanki\Clanek_2\thermoelastic-stress-expansion\synthetic_validation\figures')
+FIG = (_REPO / 'synthetic_validation' / 'figures')
 
 labels = ['FE-only\n(no camera)', 'uncorrected\nFE basis', 'SEMM\n(this work)', 'exact prior\n(floor)']
 vals   = [95.0, 34.3, 11.3, 0.1]

@@ -1,6 +1,12 @@
+from pathlib import Path as _Path
+
+# Repository root (this file's directory) - all paths below are relative to it.
+_REPO = _Path(__file__).resolve().parent
+(_REPO / 'synthetic_validation' / 'figures').mkdir(parents=True, exist_ok=True)
+
 import sys, matplotlib
 matplotlib.use('Agg')
-sys.path.insert(0, r'C:\Users\jasas\Work\Clanki\Clanek_2\Writing_article\article_bundle\scripts')
+sys.path.insert(0, str(_REPO))
 from plot_style import apply_style, MM_TO_INCH
 apply_style()
 
@@ -8,13 +14,13 @@ import json
 import numpy as np
 import matplotlib.pyplot as plt
 
-FIG = r'C:/Users/jasas/Work/Clanki/Clanek_2/thermoelastic-stress-expansion/synthetic_validation/figures'
+FIG = str(_REPO / 'synthetic_validation' / 'figures')
 def save_fig(fig, name):
     fig.savefig(f'{FIG}/{name}.pdf')
     fig.savefig(f'{FIG}/{name}.png')
     print('saved', name)
 
-S = json.load(open(r'C:/Users/jasas/Work/Clanki/Clanek_2/thermoelastic-stress-expansion/synthetic_validation/figures_data/fig_data_broad.json'))
+S = json.load(open(str(_REPO / 'synthetic_validation' / 'figures_data' / 'fig_data_broad.json')))
 C = S['collapse']
 
 BLUE = '#0072B2'

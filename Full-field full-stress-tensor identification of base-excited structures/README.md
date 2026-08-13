@@ -14,15 +14,29 @@ This directory contains the complete processing pipeline and the numerical-valid
   - `method_*.md` — detailed method documentation.
 - `synthetic_validation/` — the numerical-validation framework (Section 4 and Appendix B of the article): truth/parent FE models, forward model, noise calibration and injection, expansion, metrics, and the study/analysis scripts (`analysis/`). FE generation requires ANSYS MAPDL; the analytic path and the test suite run without ANSYS.
 - `stage1_solver/` — the simplified flat-plate modal-stress solver used as the FE prior.
-- `fig_*.py` — scripts that generate the article figures.
+- `fig_*.py` — scripts that generate the article figures; `plot_style.py` holds the shared matplotlib style.
 - `tests/` — test suite: `python -m pytest tests/` (no ANSYS required).
 - `pyFBSmaster/` — vendored [pyFBS](https://gitlab.com/ladisk/pyFBS) providing the SEMM implementation.
 
 ## Measurement data
 
-The measurement recordings (roving-hammer IR campaign and the base-excitation recording, ~3 GB) are published as a Zenodo dataset: **DOI to be added**. The notebooks read the dataset's folder structure directly — set `DATA_ROOT` in the first configuration cell of each notebook to the extracted dataset location.
+The measurement recordings (roving-hammer IR campaign and the base-excitation recording, ~3 GB) are too large to distribute here. A public deposit is in preparation; until it is available the recordings can be obtained from the authors.
+
+The notebooks read the recordings' folder structure directly. `DATA_ROOT` is the only path that has to be adapted — set it in the configuration cell near the top of each notebook, or supply it through the `THERMO_DATA_ROOT` environment variable. Everything else is resolved relative to the repository.
 
 Load the raw `.hcc` IR recordings with `fasthcc.read_hcc(path, calibrated=True)`; force and accelerometer records are LDAQ pickles.
+
+## Reproducing the figures
+
+The figure scripts run from any working directory and write to `synthetic_validation/figures/`:
+
+```
+python fig_tensor_maps.py
+```
+
+Thirteen of them work directly against the data included in `synthetic_validation/figures_data/`. The rest first need intermediates that are regenerated rather than shipped, because of their size: `figures_data/validation_fields.npz` (from `synthetic_validation/analysis/gen_validation_fields.py`) and `synthetic_validation/analysis/broad_analysis/` (from `gen_broad_analysis.py` and `gen_robustness_sweep_amp.py`). Regenerating those requires ANSYS MAPDL.
+
+The published figures are typeset with LaTeX. Without a LaTeX installation the scripts fall back to matplotlib's mathtext, which is close but not identical; set `PLOT_STYLE_USETEX` to `0` or `1` to force either mode.
 
 ## Dependencies
 

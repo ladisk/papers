@@ -15,9 +15,15 @@ Reproduces (not hardcodes) the response-letter numbers:
     condition number  kappa = 1.7
     inter-mode correlation  0.48  (|<psi_1,psi_2>|, unit-norm columns)
 """
+from pathlib import Path as _Path
+
+# Repository root (this file's directory) - all paths below are relative to it.
+_REPO = _Path(__file__).resolve().parent
+(_REPO / 'synthetic_validation' / 'figures').mkdir(parents=True, exist_ok=True)
+
 import os, sys
 sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
-sys.path.insert(0, r'C:\Users\jasas\Work\Clanki\Clanek_2\Writing_article\article_bundle\scripts')
+sys.path.insert(0, str(_REPO))
 import numpy as np
 import matplotlib
 matplotlib.use('Agg')
@@ -28,8 +34,8 @@ apply_style()
 
 from synthetic_validation.expansion import normalize_mode_shapes
 
-BASE = r'C:\Users\jasas\Work\Clanki\Clanek_2\thermoelastic-stress-expansion\synthetic_validation\analysis\broad_analysis'
-FIG  = Path(r'C:\Users\jasas\Work\Clanki\Clanek_2\thermoelastic-stress-expansion\synthetic_validation\figures')
+BASE = str(_REPO / 'synthetic_validation' / 'analysis' / 'broad_analysis')
+FIG  = (_REPO / 'synthetic_validation' / 'figures')
 
 # ---------------------------------------------------------------------------
 # Build Psi_cam exactly as the harness does (harness.py run_case_from_modal):

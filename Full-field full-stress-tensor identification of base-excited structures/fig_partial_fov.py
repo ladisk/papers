@@ -8,17 +8,23 @@ Mean per-component relative-RMS error vs number of camera points (log x), two se
 
 Data: synthetic_validation/figures_data/straggler_data.npz
 """
+from pathlib import Path as _Path
+
+# Repository root (this file's directory) - all paths below are relative to it.
+_REPO = _Path(__file__).resolve().parent
+(_REPO / 'synthetic_validation' / 'figures').mkdir(parents=True, exist_ok=True)
+
 import sys, matplotlib
 matplotlib.use('Agg')
-sys.path.insert(0, r'C:\Users\jasas\Work\Clanki\Clanek_2\Writing_article\article_bundle\scripts')
+sys.path.insert(0, str(_REPO))
 import numpy as np
 import matplotlib.pyplot as plt
 from pathlib import Path
 from plot_style import apply_style, MM_TO_INCH
 apply_style()
 
-DATA = Path(r'C:\Users\jasas\Work\Clanki\Clanek_2\thermoelastic-stress-expansion\synthetic_validation\figures_data')
-FIG  = Path(r'C:\Users\jasas\Work\Clanki\Clanek_2\thermoelastic-stress-expansion\synthetic_validation\figures')
+DATA = (_REPO / 'synthetic_validation' / 'figures_data')
+FIG  = (_REPO / 'synthetic_validation' / 'figures')
 
 def save_fig(fig, name):
     fig.savefig(FIG / f'{name}.pdf'); fig.savefig(FIG / f'{name}.png'); print('saved', name)

@@ -7,8 +7,9 @@ Single-process 3D-printed smart pad with CNN-based touch localization and force 
 Virtual and Physical Prototyping,
 [paper](https://www.ladisk.si/?what=abstract&ID=422)
 * J. Šonc, K. Zaletelj, and J. Slavič, 
-Full-Field Full-Stress-Tensor Identification of Base-Excited Structures, 
+Full-field full-stress-tensor identification of base-excited structures, 
 Mechanical Systems and Signal Processing, 
+[paper](https://www.ladisk.si/?what=abstract&ID=424),
 [code](./Full-field full-stress-tensor identification of base-excited structures)
 
 # 2020

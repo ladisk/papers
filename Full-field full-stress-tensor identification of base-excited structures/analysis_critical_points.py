@@ -37,6 +37,7 @@ from __future__ import annotations
 
 import json
 import pickle
+import os
 import sys
 from pathlib import Path
 
@@ -54,8 +55,11 @@ from synthetic_validation.noise import estimate_camera_noise_floor  # noqa: E402
 # ---------------------------------------------------------------------------
 # Configuration -- copied verbatim from transmissibility_expansion.ipynb
 # ---------------------------------------------------------------------------
-DATA_ROOT = Path(r"C:\Users\jasas\Work\Clanki\Clanek_2\data")
-PIPE_DIR = Path(r'C:\Users\jasas\Work\Clanki\Clanek_2\thermoelastic-stress-expansion\dual_stage_base_pipeline')
+# DATA_ROOT is the only path that must be adapted: point it at the directory
+# holding the measurement recordings (see the README). It can also be supplied
+# through the THERMO_DATA_ROOT environment variable.
+DATA_ROOT = Path(os.environ.get("THERMO_DATA_ROOT", r"C:\path\to\dataset")).resolve()
+PIPE_DIR = REPO / "dual_stage_base_pipeline"
 STAGE1_RUN = "stage1_20260306_075427"
 STAGE1_DIR = DATA_ROOT / STAGE1_RUN
 

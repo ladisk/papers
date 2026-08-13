@@ -17,8 +17,14 @@ Right panel: damage-weighted vs. unweighted first-invariant error for a range of
 
 Data: synthetic_validation/figures_data/validation_fields.npz
 """
+from pathlib import Path as _Path
+
+# Repository root (this file's directory) - all paths below are relative to it.
+_REPO = _Path(__file__).resolve().parent
+(_REPO / 'synthetic_validation' / 'figures').mkdir(parents=True, exist_ok=True)
+
 import sys
-sys.path.insert(0, r'C:\Users\jasas\Work\Clanki\Clanek_2\Writing_article\article_bundle\scripts')
+sys.path.insert(0, str(_REPO))
 
 import matplotlib
 matplotlib.use('Agg')
@@ -30,7 +36,7 @@ from plot_style import apply_style, MM_TO_INCH
 
 apply_style()
 
-BASE     = Path(r'C:\Users\jasas\Work\Clanki\Clanek_2\thermoelastic-stress-expansion')
+BASE     = _REPO
 DATA_DIR = BASE / 'synthetic_validation' / 'figures_data'
 FIG_DIR  = BASE / 'synthetic_validation' / 'figures'
 
